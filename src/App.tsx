@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, For } from "solid-js";
 
 // With the Tauri API npm package:
 import { invoke } from "@tauri-apps/api/tauri";
@@ -11,10 +11,10 @@ const App: Component = () => {
     invoke<string[]>("list_files").then((message) => setValue(message));
 
   return (
-    <p class="text-4xl text-green-700 text-center py-20">
-      Hello muso {value()}
+    <div>
       <button onClick={invokeMe}>Invoke!</button>
-    </p>
+      <For each={value()}>{(dir) => <div>{dir}</div>}</For>
+    </div>
   );
 };
 
